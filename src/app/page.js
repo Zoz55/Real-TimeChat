@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { db, auth, signInWithGoogle, logOut } from './../firebase';
+import { db, auth, signInWithGoogle, logOut } from './firebase';
 import { collection, addDoc, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
