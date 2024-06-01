@@ -30,21 +30,16 @@ export default function Home() {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    console.log('newMessage state has changed, input field should re-render');
-  }, [newMessage]);
-  
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (newMessage.trim() === '' || !user) return;
-    console.log(newMessage)
     addDoc(collection(db, 'messages'), {
       text: newMessage,
       timestamp: new Date(),
       user: user.displayName,
     });
     setNewMessage('');
-    console.log(newMessage)
+
   };
 
   return (
