@@ -50,7 +50,7 @@ export default function Home() {
     <Header user={user} />
       {user ? (
         <div >
-          <div className='chatWindow max-h-[80vh] px-5'>
+          <div className='chatWindow max-h-[80vh] p-5'>
             {messages.map((message) => (
               <div key={message.id} className={`${message.uid === user.uid ? 'text-right' : ''} mb-2`}>
               {/* <div key={message.id} className={`${message.uid === user.uid ? 'myMessage bg-[#17B67C]' : 'otherMessage bg-[#1A1827]'} block mb-2`}> */}
