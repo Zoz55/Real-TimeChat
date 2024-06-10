@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { inter } from "./fonts";
 import "./globals.css";
 
@@ -10,7 +11,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* <body >{children}</body> */}
+      <Head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png" />
+        <meta name="theme-color" content="#000000" />
+      </Head>
       <body className={inter.className}>{children}</body>
     </html>
   );
