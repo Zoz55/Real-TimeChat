@@ -1,10 +1,11 @@
 // src/app/chat/page.js
 'use client';
-
+import { pacifico } from './fonts'
 import { useEffect, useState } from 'react';
 import { db, auth, signInWithGoogle, logOut } from './firebase';
 import { collection, addDoc, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
+import Header from './components/header';
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -37,37 +38,43 @@ export default function Home() {
       text: newMessage,
       timestamp: new Date(),
       user: user.displayName,
+      uid: user.uid,  // Save user ID to track messages
     });
     setNewMessage('');
 
   };
 
   return (
-    <div>
-      <h1>Real-Time Chat</h1>
+    <div className='container min-h-screen'> 
+
+    <Header user={user} />
       {user ? (
-        <div>
-          <button onClick={logOut}>Logout</button>
-          <div>
+        <div >
+          <div className='chatWindow max-h-[80vh] px-5'>
             {messages.map((message) => (
-              <div key={message.id}>
-                <span>{message.user}: {message.text}</span>
-              </div>
+              <div key={message.id} className={`${message.uid === user.uid ? 'text-right' : ''} mb-2`}>
+              {/* <div key={message.id} className={`${message.uid === user.uid ? 'myMessage bg-[#17B67C]' : 'otherMessage bg-[#1A1827]'} block mb-2`}> */}
+                <span className={`${message.uid === user.uid ? 'hidden' : ''} text-white pr-2`}>{message.user} </span>
+                <span className={`${message.uid === user.uid ? 'bg-[#17B67C] myMessage' : 'bg-[#1A1827] otherMessage'} text-white p-3  rounded-lg message `}> {message.text}</span>
+                <span className={`${message.uid === user.uid ? 'pt-4' : ''} timestamp`}>{new Date(message.timestamp?.toDate()).toLocaleTimeString()}</span>
+            </div>
             ))}
           </div>
-          <form onSubmit={handleSendMessage}>
+          <form onSubmit={handleSendMessage} className='inputForm'>
             <input
-              className='message'
+              className='messageInput'
               type="text"
               value={newMessage}
               onChange={e => setNewMessage(e.target.value)}
               placeholder="Type a message"
             />
-            <button type="submit">Send</button>
+            <button type="submit" className='sendButton'>Send</button>
           </form>
         </div>
       ) : (
-        <button onClick={signInWithGoogle}>Sign in with Google</button>
+        <div className='flex justify-center items-center mt-auto mb-auto'>
+          <button onClick={signInWithGoogle} className=''>Sign in with Google</button>
+        </div>
       )}
     </div>
   );

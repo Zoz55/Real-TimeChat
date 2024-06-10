@@ -3,32 +3,106 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  --background: #252331;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--background);
 }
 
-.message{
-  color: blue;
+.container {
+  padding: 20px;
+
+  margin: auto;
+
 }
+
+.chatWindow {
+
+  overflow-y: scroll;
+  background: var(--background);
+
+  border: #ccc solid 1px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+
+.user {
+  font-weight: bold;
+
+}
+
+.text {
+  display: inline-block;
+  margin: 5px;
+  color: #dc3545;
+}
+
+.myMessage{
+  position: relative;
+  border-radius:  100vh 100vh 0px 100vh;
+  padding: 10px 15px;
+  margin: 10px 0;
+  max-width: 80%;
+  word-wrap: break-word;
+  }
+  
+  .otherMessage{
+    position: relative;
+    border-radius:  100vh 100vh 100vh 0px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+
+.timestamp {
+  display: block;
+  font-size: 0.8em;
+  color: #999;
+}
+
+.inputForm {
+  display: flex;
+}
+
+.messageInput {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.sendButton {
+  padding: 10px 20px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.logoutButton, .signInButton {
+  padding: 10px 20px;
+  border: none;
+  background: #dc3545;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
